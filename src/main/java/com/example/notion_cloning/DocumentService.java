@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.notion_cloning.DocumentResponse.ChildDocuments;
 
 import lombok.RequiredArgsConstructor;
 
@@ -84,7 +83,7 @@ public class DocumentService {
 	private DocumentResponse convertToDocumentDto(Document document) {
 		List<ChildDocuments> childDocuments = document.getDocuments()
 			.stream()
-			.map(ChildDocuments::new)
+			.map((Document t) -> new ChildDocuments(t.getId(), t.getTitle(), t.getCreatedAt(), t.getUpdatedAt()))
 			.collect(Collectors.toList());
 
 		return new DocumentResponse(document.getId(), document.getTitle(), document.getContent(), childDocuments,
