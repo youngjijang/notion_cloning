@@ -36,7 +36,7 @@ public class Document extends BaseEntity {
 	@JoinColumn(name = "parent_id")
 	private Document parent;
 
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
 	private List<Document> documents = new ArrayList<>();
 
 	public void addDocument(Document document) {
